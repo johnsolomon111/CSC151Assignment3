@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="container" style="align-content: center; ">Add Course</h1>
+<br>
+<div class="container" style="align-content: center;">
+<form method="POST" action="{{ url_for('addcourse') }}">  
+  {{ form.csrf_token }}
+
+    <div>
+      {{ render_field(form.course, placeholder=form.course.label.text, class="form-control input-sm form-control-lg is-invalid", style="height: 40px; width: 65%;") }}
+    </div>
+    <div>
+      {{ render_field(form.code, placeholder=form.code.label.text, class="form-control input-sm form-control-lg is-invalid", style="height: 40px; width: 65%;") }}
+    </div>
+    <br>
+    <input type="submit" value="Submit" class="btn btn-primary">
+    <a href="/course" class="btn btn-default">Cancel</a>
+</form>
+</div>
+{% endblock %}

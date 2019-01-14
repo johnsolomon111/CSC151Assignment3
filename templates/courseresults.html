@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% from '_formhelper.html' import search_field %}
+
+{% block content %}
+<h1 class="container" style="align-content: center; ">CRUD Application</h1>
+<br>
+<div class="btn-toolbar">
+  <a href="/" class="btn btn-default" style="margin-left: 15px;">Student List</a>
+  <a href="/course" class="btn btn-default" style="margin-right: 10%; margin-left: 15px;">Course List</a>
+
+  <form class="form-inline my-2 my-md-0" action="{{ url_for('searchcourse') }}" method="POST">
+        {{ searchForm.csrf_token }}
+        <!-- <input class="form-control" type="text" placeholder="Search" style="width: 30%;"> -->
+        <div class="form-control">
+          {{ search_field(searchForm.course, placeholder="Search Student", style="padding: 0; border: transparent;") }}
+        </div>
+        <button class="btn btn-default" style="margin-left: 15px;" type="submit">Search</button>
+        
+  </form>
+
+</div>
+  <div class="well" style="margin: 10px;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Course Name</th>
+          <th style="width: 40px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for results in result %}
+        <tr>
+          <td>{{ results.course_code  }}</td>
+          <td>{{ results.course_name }}</td>
+          <td>
+            <div> 
+              <a href="/deletecourse/{{ results.id }}" class="btn btn-danger" onclick="return confirm('Are you sure to want to delete?')">X</i></a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/">Home</a>
+</div> 
+{% endblock %}
